@@ -1,27 +1,43 @@
 // Confetti from https://codepen.io/linrock/pen/Amdhr
 
 (function() {
-  if(document.body.innerHTML.indexOf("force-pushed") === -1) {
+  // Does it contain a force push?
+  var links = document.querySelectorAll('a');
+  var lastForcePush, centerX, centerY;
+  for (var i = links.length - 1; i >= 0; --i) {
+    if (links[i].innerHTML === "force-pushed") {
+      lastForcePush = links[i];
+
+      // TODO something fun ;P
+      var rect = lastForcePush.getBoundingClientRect();
+      centerY = rect.top - rect.bottom;
+      centerX = rect.right - rect.left;
+    }
+  }
+
+  if(typeof lastForcePush == "undefined") {
     // No cause to celebrate...no force pushing...
     return;
   }
-  document.body.innerHTML = document.body.innerHTML + '<canvas id="world" style=pointer-events:none;position:fixed;left:0;top:0;width:100%;height:100%></canvas>';
+
+  document.body.innerHTML = document.body.innerHTML + '<canvas id="confetti-time" style=pointer-events:none;position:fixed;left:0;top:0;width:100%;height:100%></canvas>';
 
   var COLORS, Confetti, NUM_CONFETTI, PI_2, canvas, confetti, context, drawCircle, i, range, resizeWindow, xpos;
 
-  NUM_CONFETTI = 350;
+  NUM_CONFETTI = 200;
 
   COLORS = [[85, 71, 106], [174, 61, 99], [219, 56, 83], [244, 92, 68], [248, 182, 70]];
 
   PI_2 = 2 * Math.PI;
 
-  canvas = document.getElementById("world");
+  canvas = document.getElementById("confetti-time");
 
   context = canvas.getContext("2d");
 
   window.w = 0;
-
   window.h = 0;
+
+  window.STOP_CONFETTI = false;
 
   resizeWindow = function() {
     window.w = canvas.width = window.innerWidth;
@@ -107,6 +123,9 @@
   })();
 
   window.step = function() {
+    if (window.STOP_CONFETTI) {
+      return;
+    }
     var c, j, len, results;
     requestAnimationFrame(step);
     context.clearRect(0, 0, w, h);
