@@ -11,4 +11,4 @@ A Chrome extension to celebrate that special force push in your Github PRs
 
 ### Demo
 
-![force push in action](https://github.com/ahollenbach/force-push/blob/8eb6b8133b3ab1f384849a611cc945fc82ddcc91/celebrate.png?raw=true)
+![force push in action](https://github.com/ahollenbach/force-push/blob/c093c0358d4e95e5077532953ecaf319aa761bcb/celebrate.gif?raw=true)
