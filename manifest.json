@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Force Push",
+  "description": "git push -f origin master",
+  "version": "0.0.1",
+  "author": "ahollenbach",
+  "browser_action": {
+    "default_title": "force PUSH!"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "https://github.com/*"
+  ]
+}
